@@ -1,0 +1,7 @@
+title ThisOrThat
+
+Option Store -> Backend:Fetch options
+Backend -> UI:Send options to user
+UI<->Backend:Fetch option metadata (images etc.)
+UI->Backend:Users decision
+Backend-> Database:Store choice
