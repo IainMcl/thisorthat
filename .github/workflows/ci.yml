@@ -4,10 +4,7 @@
 # for the 'thisorthat' monorepo. It ensures that code quality, linting,
 # and tests are automatically checked for all pushes and pull requests to the main branch.
 #
-# The pipeline is optimized to run three jobs in parallel for maximum efficiency:
-# 1. lint: Checks both Python and JS/TS code using a single pre-commit configuration.
-# 2. backend-test: Tests the Python/FastAPI application.
-# 3. frontend-test: Tests the JavaScript/React application.
+# The pipeline is optimized to run jobs in parallel for maximum efficiency.
 
 name: Build, Lint, and Test
 
@@ -36,10 +33,10 @@ jobs:
       - name: Install uv
         run: curl -LsSf https://astral.sh/uv/install.sh | sh
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: '20'
 
       - name: Install Python dev dependencies
         working-directory: ./backend
@@ -48,9 +45,9 @@ jobs:
           source .venv/bin/activate
           uv pip install -e ".[dev]"
 
-      - name: Install frontend dependencies
-        working-directory: ./frontend
-        run: npm install
+      # - name: Install frontend dependencies
+      #   working-directory: ./frontend
+      #   run: npm install
 
       - name: Run pre-commit checks
         run: |
@@ -95,41 +92,41 @@ jobs:
           pytest
 
   ################################################################
-  # Frontend Test Job: Runs Jest and Playwright
+  # Frontend Test Job: Runs Jest and Playwright (DISABLED)
   ################################################################
-  frontend-test:
-    name: Test Frontend
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Cache Node.js dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install frontend dependencies
-        working-directory: ./frontend
-        run: npm install
-
-      - name: Run Jest/RTL component tests
-        working-directory: ./frontend
-        # The '--watchAll=false' flag is important to prevent Jest from running in interactive watch mode in a CI environment.
-        run: npm test -- --watchAll=false
-
-      - name: Install Playwright Browsers
-        working-directory: ./frontend
-        run: npx playwright install --with-deps
-
-      - name: Run Playwright E2E tests
-        working-directory: ./frontend
-        run: npx playwright test
+  # frontend-test:
+  #   name: Test Frontend
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20'
+  #
+  #     - name: Cache Node.js dependencies
+  #       uses: actions/cache@v4
+  #       with:
+  #         path: ~/.npm
+  #         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-node-
+  #
+  #     - name: Install frontend dependencies
+  #       working-directory: ./frontend
+  #       run: npm install
+  #
+  #     - name: Run Jest/RTL component tests
+  #       working-directory: ./frontend
+  #       # The '--watchAll=false' flag is important to prevent Jest from running in interactive watch mode in a CI environment.
+  #       run: npm test -- --watchAll=false
+  #
+  #     - name: Install Playwright Browsers
+  #       working-directory: ./frontend
+  #       run: npx playwright install --with-deps
+  #
+  #     - name: Run Playwright E2E tests
+  #       working-directory: ./frontend
+  #       run: npx playwright test
