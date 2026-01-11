@@ -12,16 +12,16 @@ The long-term vision is for the application to be generic, allowing it to be ada
 
 We will follow a simple, iterative process for development:
 
-1.  **Design:** For any new feature or significant change, we will first collaborate on a design document.
+1.  **Design:** For any new feature or significant change, we will first collaborate on and update the project's design document, located at `docs/DesignDocument.md`.
 2.  **Implement:** Gemini will write the code based on the approved design.
 3.  **Test:** Gemini will write and run automated tests to ensure the implementation is correct and robust.
 4.  **Review:** The project owner will review the changes.
 
 ## 3. Technical Standards
 
-*   **Primary Language(s):** [To be determined]
-*   **Code Style & Linting:** [To be determined]
-*   **Testing Framework:** [To be determined]
+*   **Primary Language(s):** To be determined during implementation (Python for backend, JavaScript/TypeScript for frontend).
+*   **Code Style & Linting:** To be determined during implementation (e.g., Black/Ruff for Python, Prettier/ESLint for JavaScript/TypeScript).
+*   **Testing Framework:** Backend: `pytest`. Frontend: Jest, React Testing Library, and Playwright.
 
 ## 4. Our Collaboration
 
