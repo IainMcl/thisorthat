@@ -12,3 +12,7 @@ dependencies = [
 dev = [
     "pre-commit>=4.5.1",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["src/tests"]
+pythonpath = ["."]
