@@ -50,9 +50,7 @@ jobs:
       #   run: npm install
 
       - name: Run pre-commit checks
-        run: |
-          source backend/.venv/bin/activate
-          pre-commit run --all-files
+        run: source backend/.venv/bin/activate && pre-commit run --all-files
 
   ################################################################
   # Backend Test Job: Runs pytest
