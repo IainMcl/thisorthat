@@ -83,11 +83,15 @@ practices that I want to develop.
 
 #### Decision
 
-For this simple data storage a relational database like SQLite or PostgreSQL
-would be sufficient. In future stages when thinking about more complex queries
-and relationships a graph database like Neo4j could be considered. This
-graph database could build off the relational database or replace it when
-the complexity of the data and queries increases.
+For the initial implementation, a relational database like **SQLite** (for simplicity in development) or **PostgreSQL** (for robustness) will be used.
+
+To interact with the database, we will use **SQLModel**. This decision is based on the following reasoning:
+*   **Seamless Integration:** SQLModel is built on Pydantic and SQLAlchemy by the creator of FastAPI. This provides a single, consistent way to define data models, API request/response models, and database schemas, significantly reducing code duplication.
+*   **Development Speed:** As an Object-Relational Mapper (ORM), it allows us to write database queries in Python, which is faster and more maintainable than writing raw SQL.
+*   **Security:** ORMs like SQLModel automatically handle SQL parameterization, providing strong, built-in protection against SQL injection vulnerabilities.
+*   **Database Agnostic:** It allows the application to be easily migrated from SQLite to PostgreSQL or another relational database in the future with minimal code changes.
+
+In later stages, as outlined in the "Future Enhancements," a graph database like Neo4j could be considered to complement or replace the relational store if query complexity increases.
 
 ### Backend
 
