@@ -38,6 +38,22 @@ jobs:
       #   with:
       #     node-version: '20'
 
+      - name: Cache uv dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/uv
+          key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/uv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-uv-
+
+      - name: Cache pre-commit dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pre-commit
+          key: ${{ runner.os }}-pre-commit-${{ hashFiles('**/.pre-commit-config.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pre-commit-
+
       - name: Install Python dev dependencies
         working-directory: ./backend
         run: uv venv && uv pip install -e ".[dev]"
@@ -47,7 +63,7 @@ jobs:
       #   run: npm install
 
       - name: Run pre-commit checks
-        run: uv run pre-commit run --all-files
+        run: cd backend && uv run pre-commit run --all-files
 
   ################################################################
   # Backend Test Job: Runs pytest
@@ -71,7 +87,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/uv
-          key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml') }}
+          key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/uv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-uv-
 
       - name: Install Python dependencies
         working-directory: ./backend
