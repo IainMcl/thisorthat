@@ -7,13 +7,20 @@ requires-python = ">=3.13"
 dependencies = [
     "fastapi[standard]>=0.128.0",
     "pytest>=9.0.2",
+    "sqlmodel>=0.0.31",
 ]
 
-[dependency-groups]
+[project.optional-dependencies]
 dev = [
     "pre-commit>=4.5.1",
+    "uvicorn>=0.30.3",
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["src/tests"]
 pythonpath = ["."]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.1",
+]
