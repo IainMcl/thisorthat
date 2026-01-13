@@ -1,0 +1,17 @@
+# General ignores
+.DS_Store
+.env
+.idea/ # PyCharm specific
+
+# Python ignores
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.venv/ # uv virtual environment
+
+# Node.js ignores (for frontend/)
+frontend/node_modules/
+frontend/build/
+frontend/dist/

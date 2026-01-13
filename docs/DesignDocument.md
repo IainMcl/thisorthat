@@ -260,4 +260,3 @@ winning options).
 if the application is expanded to support multiple users?
 *   **User Content:** Could we allow users to upload their own options to
 compare in the future?
-
