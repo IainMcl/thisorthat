@@ -1,14 +1,11 @@
 db-start:
-    cd backend && sudo docker compose up -d
+    cd backend && docker compose up -d
 
 db-stop:
-    cd backend && sudo docker compose down
+    cd backend && docker compose down
 
 db-reset:
-    cd backend && sudo docker compose down -v && sudo docker compose up -d
-
-test:
-    echo "Hello from justfile"
+    cd backend && docker compose down -v && docker compose up -d
 
 install-backend:
     echo "Installing backend..."
